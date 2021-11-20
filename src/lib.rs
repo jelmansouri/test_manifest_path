@@ -1,3 +1,7 @@
 pub fn manifest_dir() -> &'static str {
-    env!("CARGO_MANIFEST_DIR")
+    #[cfg(feature = "gen_files")]
+    return "gen_files";
+
+    #[cfg(not(feature = "gen_files"))]
+    return env!("CARGO_MANIFEST_DIR");
 }
